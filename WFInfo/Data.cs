@@ -672,7 +672,7 @@ namespace WFInfo
             }
 
 
-            Main.AddLog("Found part(" + low + "): \"" + lowest_unfiltered + "\" from \"" + name + "\"");
+            Main.AddLog("Found part(" + low + "): \"" + lowest_unfiltered + "\" from \"" + name + "\" (Len: " + name.Replace(" ", "").Length + ")");
             return lowest;
         }
 

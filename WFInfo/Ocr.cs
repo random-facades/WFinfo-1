@@ -227,12 +227,13 @@ namespace WFInfo
                     for (int i = 0; i < firstChecks.Length; i++)
                     {
                         string part = firstChecks[i];
-                        if (part.Replace(" ", "").Length > 6)
+                        string correctName = Main.dataBase.GetPartName(part, out firstProximity[i]);
+                        if (part.Replace(" ", "").Length / 2 > firstProximity[i])
                         {
-                            string correctName = Main.dataBase.GetPartName(part, out firstProximity[i]);
                             JObject job = Main.dataBase.marketData.GetValue(correctName).ToObject<JObject>();
                             string ducats = job["ducats"].ToObject<string>();
-                            if(int.Parse(ducats) == 0) {
+                            if (int.Parse(ducats) == 0)
+                            {
                                 hideRewardInfo = true;
                             }
                             string plat = job["plat"].ToObject<string>();
@@ -251,10 +252,10 @@ namespace WFInfo
                             {
                                 if (Settings.isOverlaySelected)
                                 {
-                                        Main.overlays[partNumber].LoadTextData(correctName, plat, ducats, volume, vaulted, partsOwned, hideRewardInfo);
-                                        Main.overlays[partNumber].Resize(overWid);
-                                        Main.overlays[partNumber].Display((int)((startX + width / 4 * partNumber) / dpiScaling), startY);
-                                    
+                                    Main.overlays[partNumber].LoadTextData(correctName, plat, ducats, volume, vaulted, partsOwned, hideRewardInfo);
+                                    Main.overlays[partNumber].Resize(overWid);
+                                    Main.overlays[partNumber].Display((int)((startX + width / 4 * partNumber) / dpiScaling), startY);
+
                                 } else
                                 {
                                     Main.window.loadTextData(correctName, plat, ducats, volume, vaulted, partsOwned, partNumber, true, hideRewardInfo);
