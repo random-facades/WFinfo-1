@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -18,6 +18,7 @@ namespace WFInfo
         readonly Main main; //subscriber
         public static MainWindow INSTANCE;
         public static WelcomeDialogue hai;
+        public static LowLevelListener listener;
 
         public MainWindow()
         {
@@ -30,7 +31,7 @@ namespace WFInfo
             INSTANCE = this;
             main = new Main();
 
-            LowLevelListener listener = new LowLevelListener(); //publisher
+            listener = new LowLevelListener(); //publisher
             try
             {
                 if (File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\WFInfo\settings.json"))
@@ -82,6 +83,10 @@ namespace WFInfo
                 if (!Settings.settingsObj.TryGetValue("Auto", out _))
                     Settings.settingsObj["Auto"] = false;
                 Settings.auto = (bool)Settings.settingsObj.GetValue("Auto");
+
+                if (!Settings.settingsObj.TryGetValue("CuttingEdge", out _))
+                    Settings.settingsObj["CuttingEdge"] = false;
+                Settings.autoScaling = (bool)Settings.settingsObj.GetValue("CuttingEdge");
 
                 if (!Settings.settingsObj.TryGetValue("AutoDelay", out _))
                     Settings.settingsObj["AutoDelay"] = 250L;
@@ -166,9 +171,6 @@ namespace WFInfo
         public void Exit(object sender, RoutedEventArgs e)
         {
             notifyIcon.Dispose();
-            Main.relicWindow.Close();
-            Main.equipmentWindow.Close();
-            Main.settingsWindow.Close();
             Application.Current.Shutdown();
         }
 
