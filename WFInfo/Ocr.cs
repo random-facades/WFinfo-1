@@ -614,7 +614,7 @@ namespace WFInfo
                 case WFtheme.HIGH_CONTRAST:
                     return (Math.Abs(test.GetHue() - primary.GetHue()) < 3 || Math.Abs(test.GetHue() - secondary.GetHue()) < 2) && test.GetSaturation() >= 0.75 && test.GetBrightness() >= 0.35; // || Math.Abs(test.GetHue() - secondary.GetHue()) < 2;
                 case WFtheme.LEGACY:
-                    return (test.GetBrightness() >= 0.75 && test.GetSaturation() <= 0.2)
+                    return (test.GetBrightness() >= 0.70) // && test.GetSaturation() <= 0.2)
                         || (Math.Abs(test.GetHue() - secondary.GetHue()) < 6 && test.GetBrightness() >= 0.5 && test.GetSaturation() >= 0.5);
                 case WFtheme.NIDUS:
                     return (Math.Abs(test.GetHue() - (primary.GetHue() + 6)) < 8 && test.GetSaturation() >= 0.30)

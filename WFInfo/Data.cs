@@ -228,7 +228,6 @@ namespace WFInfo
                 relicData = new JObject();
                 relicData["timestamp"] = DateTime.Now;
                 nameData = new JObject();
-                nameData["Forma Blueprint"] = "Forma Blueprint";
 
                 foreach (KeyValuePair<string, JToken> era in allFiltered["relics"].ToObject<JObject>())
                 {
@@ -283,6 +282,12 @@ namespace WFInfo
                             marketData[partName]["ducats"] = Convert.ToInt32(part.Value["ducats"].ToString());
                         }
                     }
+                }
+
+                foreach (KeyValuePair<string, JToken> prime in allFiltered["ignored_items"].ToObject<JObject>())
+                {
+                    nameData[prime.Key] = prime.Key;
+                    marketData[prime.Key] = prime.Value;
                 }
 
 
